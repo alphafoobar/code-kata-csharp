@@ -1,49 +1,88 @@
 ﻿using NUnit.Framework;
+using src;
 
-namespace Kata02_BinarySearch.Test
+namespace tests
 {
     [TestFixture]
     public class BinarySearchTests
     {
-        private BinarySearch _binarySearch = new BinarySearch();
+        private readonly int[] _arrayEmpty = { };
+        private readonly int[] _arrayOfOne = {1};
+        private readonly int[] _arrayOfThree = {1, 3, 5};
+        private readonly int[] _arrayOfFour = {1, 3, 5, 7};
 
         [Test]
         public void TestEmpty()
         {
-            Assert.Equals(-1, _binarySearch.Chop(3, new int[] { }));
+            Assert.AreEqual(-1, BinarySearch.Chop(3, _arrayEmpty));
         }
 
         [Test]
         public void TestSingle()
         {
-            Assert.Equals(-1, _binarySearch.Chop(3, new[] {1}));
-            Assert.Equals(0, _binarySearch.Chop(1, new[] {1}));
+            Assert.AreEqual(-1, BinarySearch.Chop(3, _arrayOfOne));
+            Assert.AreEqual(0, BinarySearch.Chop(1, _arrayOfOne));
         }
 
         [Test]
-        public void TestTriple()
+        public void TestTripleFirst()
         {
-            Assert.Equals(0, _binarySearch.Chop(1, new[] {1, 3, 5}));
-            Assert.Equals(1, _binarySearch.Chop(3, new[] {1, 3, 5}));
-            Assert.Equals(2, _binarySearch.Chop(5, new[] {1, 3, 5}));
-            Assert.Equals(-1, _binarySearch.Chop(0, new[] {1, 3, 5}));
-            Assert.Equals(-1, _binarySearch.Chop(2, new[] {1, 3, 5}));
-            Assert.Equals(-1, _binarySearch.Chop(4, new[] {1, 3, 5}));
-            Assert.Equals(-1, _binarySearch.Chop(6, new[] {1, 3, 5}));
+            Assert.AreEqual(0, BinarySearch.Chop(1, _arrayOfThree));
         }
 
         [Test]
-        public void TestQuadriple()
+        public void TestTripleSecond()
         {
-            Assert.Equals(0, _binarySearch.Chop(1, new[] {1, 3, 5, 7}));
-            Assert.Equals(1, _binarySearch.Chop(3, new[] {1, 3, 5, 7}));
-            Assert.Equals(2, _binarySearch.Chop(5, new[] {1, 3, 5, 7}));
-            Assert.Equals(3, _binarySearch.Chop(7, new[] {1, 3, 5, 7}));
-            Assert.Equals(-1, _binarySearch.Chop(0, new[] {1, 3, 5, 7}));
-            Assert.Equals(-1, _binarySearch.Chop(2, new[] {1, 3, 5, 7}));
-            Assert.Equals(-1, _binarySearch.Chop(4, new[] {1, 3, 5, 7}));
-            Assert.Equals(-1, _binarySearch.Chop(6, new[] {1, 3, 5, 7}));
-            Assert.Equals(-1, _binarySearch.Chop(8, new[] {1, 3, 5, 7}));
+            Assert.AreEqual(1, BinarySearch.Chop(3, _arrayOfThree));
+        }
+
+        [Test]
+        public void TestTripleThird()
+        {
+            Assert.AreEqual(2, BinarySearch.Chop(5, _arrayOfThree));
+        }
+
+        [Test]
+        public void TestTripleNotFound()
+        {
+            Assert.AreEqual(-1, BinarySearch.Chop(0, _arrayOfThree));
+            Assert.AreEqual(-1, BinarySearch.Chop(2, _arrayOfThree));
+            Assert.AreEqual(-1, BinarySearch.Chop(4, _arrayOfThree));
+            Assert.AreEqual(-1, BinarySearch.Chop(6, _arrayOfThree));
+        }
+
+        [Test]
+        public void TestQuadripleFindFirst()
+        {
+            Assert.AreEqual(0, BinarySearch.Chop(1, _arrayOfFour));
+        }
+
+        [Test]
+        public void TestQuadripleFindSecond()
+        {
+            Assert.AreEqual(1, BinarySearch.Chop(3, _arrayOfFour));
+        }
+
+        [Test]
+        public void TestQuadripleFindThird()
+        {
+            Assert.AreEqual(2, BinarySearch.Chop(5, _arrayOfFour));
+        }
+
+        [Test]
+        public void TestQuadripleFindFourth()
+        {
+            Assert.AreEqual(3, BinarySearch.Chop(7, _arrayOfFour));
+        }
+
+        [Test]
+        public void TestQuadripleNotFound()
+        {
+            Assert.AreEqual(-1, BinarySearch.Chop(0, _arrayOfFour));
+            Assert.AreEqual(-1, BinarySearch.Chop(2, _arrayOfFour));
+            Assert.AreEqual(-1, BinarySearch.Chop(4, _arrayOfFour));
+            Assert.AreEqual(-1, BinarySearch.Chop(6, _arrayOfFour));
+            Assert.AreEqual(-1, BinarySearch.Chop(8, _arrayOfFour));
         }
     }
 }

@@ -1,12 +1,36 @@
-﻿using System;
-
-namespace Kata02_BinarySearch
+﻿namespace src
 {
     public class BinarySearch
     {
-        public int Chop(int key, int[] array)
+        public static int Chop(int key, int[] array)
         {
-            throw new NotImplementedException("Not implemented yet");
+            var offset = 0;
+            var length = array.Length;
+            while (offset < length)
+            {
+                var remaining = length - offset;
+                if (remaining == 0)
+                {
+                    return -1;
+                }
+
+                var point = offset + remaining / 2;
+                if (array[point] == key)
+                {
+                    return point;
+                }
+
+                if (array[point] > key)
+                {
+                    length = point;
+                }
+                else
+                {
+                    offset = point + 1;
+                }
+            }
+
+            return -1;
         }
     }
 }
