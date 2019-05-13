@@ -9,11 +9,6 @@
             while (offset < length)
             {
                 var remaining = length - offset;
-                if (remaining == 0)
-                {
-                    return -1;
-                }
-
                 var point = offset + remaining / 2;
                 if (array[point] == key)
                 {
